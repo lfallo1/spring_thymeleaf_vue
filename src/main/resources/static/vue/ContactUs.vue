@@ -9,8 +9,12 @@
   export default{
     data(){
       return {
-        name: "Harrison"
+        name: "Harrison",
+        pageTitle: ''
       }
+    },
+    mounted(){
+      this.pageTitle = this.$refs.pageTitle.innerText;
     }
   }
 </script>

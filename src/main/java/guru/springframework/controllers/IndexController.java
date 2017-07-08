@@ -25,7 +25,7 @@ public class IndexController {
 	
 	@ModelAttribute("pageTitle")
 	public String pageTitle(){
-		return "Thymeleaf Home Page";
+		return "My Thymeleaf Home Page";
 	}
 	
 	@RequestMapping("/")

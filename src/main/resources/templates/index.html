@@ -10,8 +10,9 @@
 		<app-contactus inline-template>
 			<div>
 				<h3>Hello from inline template {{name}}</h3>
-				<div th:text="${pageTitle}">Page title</div>
+				<div v-show="false" ref="pageTitle" th:text="${pageTitle}">Page title</div>
 				<input v-model="name" type="text" />
+				<h3>The title of this page is <strong>{{pageTitle}}</strong></h3>
 			</div>
 		</app-contactus>
 		<br>
