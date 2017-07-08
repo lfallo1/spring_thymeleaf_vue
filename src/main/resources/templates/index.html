@@ -6,6 +6,16 @@
 	<div id="app">
 		<div th:replace="fragments/jumbotron :: jumbotron"></div>
 		
+		<!-- inline template (can use thymeleaf within an inline template) -->
+		<app-contactus inline-template>
+			<div>
+				<h3>Hello from inline template {{name}}</h3>
+				<div th:text="${pageTitle}">Page title</div>
+				<input v-model="name" type="text" />
+			</div>
+		</app-contactus>
+		<br>
+		
 		<div th:if="${signupcomplete}">
 			<app-notification v-if="showNotifications" :message="'Signup complete'"></app-notification>
 		</div>
@@ -37,5 +47,6 @@
 
 <div th:replace="fragments/footer :: footer"></div>
 <div th:replace="fragments/scripts :: scripts"></div>
+
 </body>
 </html>
