@@ -1,5 +1,6 @@
 <template>
 	<div id="products-wrapper">
+		
 	  <div class="col-md-4" v-for="product in products">
 	      <div class="course-listing">
 	          <div class="row">

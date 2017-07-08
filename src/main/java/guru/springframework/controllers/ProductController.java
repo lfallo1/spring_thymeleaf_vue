@@ -2,6 +2,7 @@ package guru.springframework.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,13 +28,12 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/product/{id}")
-	public ModelAndView getProduct(@PathVariable Integer id){
+	public ModelAndView getProduct(@PathVariable Integer id, Model model){
 		
 		Product product = this.productService.getProduct(id);
 		if(product != null){
-			ModelAndView mv = new ModelAndView("product");
-			mv.addObject("product", this.productService.getProduct(id));
-			return mv;
+			model.addAttribute("product", this.productService.getProduct(id));
+			return new ModelAndView("product");
 		}
 		return new ModelAndView("redirect:/");
 	}

@@ -10,17 +10,25 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container course-listing">
     <div class="row">
         <div class="col-md-12">
-            <h1 th:text="#{index.page.title}">Spring Framework Guru - </h1><h1 th:text="${product.courseName}">Course Name</h1>
+            <h5 th:text="#{index.page.title}">Spring Framework Guru - </h5><h1 th:text="${product.courseName}">Course Name</h1>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6">
 
-                <img src="https://d2vvqscadf4c1f.cloudfront.net/scgeIJ9wRGGNWvK0jAld_ThumbFREE_01.png"
+                <img th:src="'/images/' + ${product.imageUrl}" src="https://d2vvqscadf4c1f.cloudfront.net/scgeIJ9wRGGNWvK0jAld_ThumbFREE_01.png"
                      class="center-block" />
+                     
+                <div class="text-center">
+                	<ul class="breadcrumb ">
+                		<li th:each="category : ${product.productCategories}">
+                			<a th:href="@{'/?category=' + ${category.id}}" href="/" th:text="${category.category}">Category</a>
+                		</li>
+                	</ul>
+                </div>
 
         </div>
         <div class="col-md-6">
@@ -39,9 +47,11 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row course-listing-extra-info">
         <div class="col-md-offset-6 col-md-4">
             <button class="btn-success">Buy Now!</button>
+            <span th:if="${product.price > 0}" class="small course-price" th:text="'$' + ${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}"></span>
+            <span th:if="${product.price == 0}" class="small course-price">Free</span>
         </div>
     </div>
 	<div id="back-button" class="row text-center">
