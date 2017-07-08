@@ -16,7 +16,7 @@ public class SignupNewsletterController {
 
 	@RequestMapping("/newsletter")
 	public String newsletter(Model model){
-		model.addAttribute("signupform", new SignupNewsletterCommand());
+		model.addAttribute("signupNewsletterCommand", new SignupNewsletterCommand());
 		return "newsletter";
 	}
 	

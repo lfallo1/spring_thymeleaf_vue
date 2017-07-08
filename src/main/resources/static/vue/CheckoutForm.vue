@@ -85,18 +85,6 @@ export default {
 
 <style scoped>
 
-.form-error{
-    color: #d9534f !important;
-}
-
-.form-error input{
-    border-bottom: 1px solid #d9534f !important;
-}
-
-.form-error label{
-    color: #d9534f !important
-}
-
 .float-label-control { position: relative; margin-bottom: 1.5em; }
     .float-label-control ::-webkit-input-placeholder { color: transparent; }
     .float-label-control :-moz-placeholder { color: transparent; }

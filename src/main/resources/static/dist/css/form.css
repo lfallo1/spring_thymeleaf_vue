@@ -1,0 +1,16 @@
+.form-error{
+    color: #d9534f !important;
+}
+
+.form-error input{
+    border-bottom: 1px solid #d9534f !important;
+}
+
+.form-error label{
+    color: #d9534f !important;
+}
+
+.form-horizontal .form-error{
+	border: 1px solid #d9534f !important;
+}
+ 
