@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"></head>
+<body>
+<div id="app">
+	<div th:replace="fragments/jumbotron :: jumbotron"></div>
+	<div class="row">
+		<div id="checkout-complete" class="col-xs-12 text-center">
+			<h3>Checkout complete!</h3><br />
+			<span class="glyphicon glyphicon-ok-circle"></span>
+			<a th:href="@{/}" href="/">Home</a>
+		</div>"
+	</div>
+</div>
+	
+<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/scripts :: scripts"></div>
+</body>
+</html>

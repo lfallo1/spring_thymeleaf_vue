@@ -2,34 +2,30 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header"></head>
 <body>
-<div id="app">
-	<div class="jumbotron">
-	    <div class="container">
-	        <h1>Spring Framework UNIT TESTING</h1>
-	        <p class="lead" th:text="#{index.courses.tagline}">Online Courses for Spring Framework</p>
-	        
-	    </div>
-	</div>
-	
-	<div class="container">
-		<div class="row" th:if="${filtered}">
-			<div class="col-xs-12 text-center">
-				<a th:href="@{/}" href="/">View all</a>
+
+	<div id="app">
+		<div th:replace="fragments/jumbotron :: jumbotron"></div>
+		
+		<div class="container">
+			<div class="row" th:if="${filtered}">
+				<div class="col-xs-12 text-center">
+					<a th:href="@{/}" href="/">View all</a>
+				</div>
 			</div>
+		    <div class="row">
+		        <div class="col-md-12">
+		            <h1 th:text="#{index.courses.headline}">Spring Framework Guru Courses</h1>
+		        </div>
+		    </div>
+		    <div class="row course-list list">
+		        <div class="col-md-4" th:each="p,it : ${productList}">
+		        	<small th:text="'index object: ' + ${it}"></small>
+		            <div th:replace="fragments/productdiv :: productdiv"></div>
+		        </div>
+		    </div>
 		</div>
-	    <div class="row">
-	        <div class="col-md-12">
-	            <h1 th:text="#{index.courses.headline}">Spring Framework Guru Courses</h1>
-	        </div>
-	    </div>
-	    <div class="row course-list list">
-	        <div class="col-md-4" th:each="p,it : ${productList}">
-	        	<small th:text="'index object: ' + ${it}"></small>
-	            <div th:replace="fragments/productdiv :: productdiv"></div>
-	        </div>
-	    </div>
 	</div>
-</div>
+
 <div th:replace="fragments/footer :: footer"></div>
 <div th:replace="fragments/scripts :: scripts"></div>
 </body>

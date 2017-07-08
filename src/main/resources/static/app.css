@@ -126,3 +126,13 @@ img {
 	font-size: 15px;
 	float: right;
 }
+
+#checkout-complete{
+	color: #6cb44a;
+}
+
+#checkout-complete .glyphicon{
+	font-size: 64px;
+	display: block;
+	margin-bottom: 30px;
+}

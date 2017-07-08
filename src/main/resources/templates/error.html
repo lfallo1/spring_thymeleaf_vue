@@ -6,8 +6,11 @@
 .error-actions {margin-top:15px;margin-bottom:15px;}
 .error-actions .btn { margin-right:10px; }
 </style>
-<body id="app">
-<div class="container">
+<body>
+<div id="app" class="container">
+
+	<div th:replace="fragments/jumbotron :: jumbotron"></div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="error-template">

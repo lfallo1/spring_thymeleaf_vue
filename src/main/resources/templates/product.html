@@ -1,66 +1,61 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header"></head>
-<body id="app">
-
-<div class="jumbotron">
-    <div class="container">
-        <h1>Spring Framework Guru</h1>
-        <p class="lead" th:text="#{index.courses.tagline}">Online Courses for Spring Framework</p>
-    </div>
+<body>
+<div id="app">
+	<div th:replace="fragments/jumbotron :: jumbotron"></div>
+	
+	<div class="container course-listing">
+	    <div class="row">
+	        <div class="col-md-12">
+	            <h5 th:text="#{index.page.title}">Spring Framework Guru - </h5><h1 th:text="${product.courseName}">Course Name</h1>
+	        </div>
+	    </div>
+	    <div class="row">
+	        <div class="col-md-6">
+	
+	                <img th:src="'/images/' + ${product.imageUrl}" src="https://d2vvqscadf4c1f.cloudfront.net/scgeIJ9wRGGNWvK0jAld_ThumbFREE_01.png"
+	                     class="center-block" />
+	                     
+	                <div class="text-center">
+	                	<ul class="breadcrumb ">
+	                		<li th:each="category : ${product.productCategories}">
+	                			<a th:href="@{'/?category=' + ${category.id}}" href="/" th:text="${category.category}">Category</a>
+	                		</li>
+	                	</ul>
+	                </div>
+	
+	        </div>
+	        <div class="col-md-6">
+	             <div>
+	                 <h2 th:text="${product.courseName}">Course Title</h2>
+	                 <p th:text="${product.courseDescription}">Adipiscing magna vestibulum fringilla tristique ad a primis ante mi inceptos condimentum curabitur
+	                     curabitur eu sed nullam ridiculus nunc montes id nostra dui inceptos scelerisque posuere ipsum mus.
+	                     A scelerisque libero viverra eu condimentum mollis suscipit mi consectetur semper dis ipsum nisi
+	                     in nullam aliquet iaculis in eros euismod bibendum. Adipiscing volutpat fringilla bibendum duis a
+	                     maecenas eu lorem accumsan fames sem faucibus ad mauris aliquam nam. Torquent amet adipiscing fusce
+	                     fringilla venenatis tristique scelerisque natoque malesuada nostra duis nam augue ridiculus
+	                     pulvinar ultrices laoreet in condimentum justo id. Nascetur condimentum maecenas magna metus curae
+	                     est odio ad dui fames quam a aenean consequat faucibus nostra lorem adipiscing vestibulum
+	                     ullamcorper etiam consectetur. </p>
+	             </div>
+	        </div>
+	    </div>
+	
+	    <div class="row course-listing-extra-info">
+	        <div class="col-md-offset-6 col-md-4">
+	            <a th:href="@{/checkout}" href="/checkoutform.html"><button class="btn-success">Buy Now!</button></a>
+	            <span th:if="${product.price > 0}" class="small course-price" th:text="'$' + ${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}"></span>
+	            <span th:if="${product.price == 0}" class="small course-price">Free</span>
+	        </div>
+	    </div>
+		<div id="back-button" class="row text-center">
+			<a href="/" th:href="@{/}">
+				<div class="btn btn-lg btn-danger">Back</div>
+			</a>
+		</div>    
+	</div>
 </div>
-
-<div class="container course-listing">
-    <div class="row">
-        <div class="col-md-12">
-            <h5 th:text="#{index.page.title}">Spring Framework Guru - </h5><h1 th:text="${product.courseName}">Course Name</h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-
-                <img th:src="'/images/' + ${product.imageUrl}" src="https://d2vvqscadf4c1f.cloudfront.net/scgeIJ9wRGGNWvK0jAld_ThumbFREE_01.png"
-                     class="center-block" />
-                     
-                <div class="text-center">
-                	<ul class="breadcrumb ">
-                		<li th:each="category : ${product.productCategories}">
-                			<a th:href="@{'/?category=' + ${category.id}}" href="/" th:text="${category.category}">Category</a>
-                		</li>
-                	</ul>
-                </div>
-
-        </div>
-        <div class="col-md-6">
-             <div>
-                 <h2 th:text="${product.courseName}">Course Title</h2>
-                 <p th:text="${product.courseDescription}">Adipiscing magna vestibulum fringilla tristique ad a primis ante mi inceptos condimentum curabitur
-                     curabitur eu sed nullam ridiculus nunc montes id nostra dui inceptos scelerisque posuere ipsum mus.
-                     A scelerisque libero viverra eu condimentum mollis suscipit mi consectetur semper dis ipsum nisi
-                     in nullam aliquet iaculis in eros euismod bibendum. Adipiscing volutpat fringilla bibendum duis a
-                     maecenas eu lorem accumsan fames sem faucibus ad mauris aliquam nam. Torquent amet adipiscing fusce
-                     fringilla venenatis tristique scelerisque natoque malesuada nostra duis nam augue ridiculus
-                     pulvinar ultrices laoreet in condimentum justo id. Nascetur condimentum maecenas magna metus curae
-                     est odio ad dui fames quam a aenean consequat faucibus nostra lorem adipiscing vestibulum
-                     ullamcorper etiam consectetur. </p>
-             </div>
-        </div>
-    </div>
-
-    <div class="row course-listing-extra-info">
-        <div class="col-md-offset-6 col-md-4">
-            <button class="btn-success">Buy Now!</button>
-            <span th:if="${product.price > 0}" class="small course-price" th:text="'$' + ${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}"></span>
-            <span th:if="${product.price == 0}" class="small course-price">Free</span>
-        </div>
-    </div>
-	<div id="back-button" class="row text-center">
-		<a href="/" th:href="@{/}">
-			<div class="btn btn-lg btn-danger">Back</div>
-		</a>
-	</div>    
-</div>
-
 <div th:replace="fragments/footer :: footer"></div>
 <div th:replace="fragments/scripts :: scripts"></div>
 </body>

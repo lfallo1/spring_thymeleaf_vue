@@ -40,6 +40,15 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>19.0</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
@@ -47,9 +56,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-<!-- 				<configuration>
-					<addResources>true</addResources>
-				</configuration> -->
+				<!-- <configuration> <addResources>true</addResources> </configuration> -->
 			</plugin>
 		</plugins>
 	</build>
