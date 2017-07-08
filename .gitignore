@@ -1,6 +1,7 @@
 node_modules/
 bower/
 target/
+dist/
 
 # Compiled source #
 ###################
