@@ -6,10 +6,19 @@
 	<div id="app">
 		<div th:replace="fragments/jumbotron :: jumbotron"></div>
 		
+		<div th:if="${signupcomplete}">
+			<app-notification v-if="showNotifications" :message="'Signup complete'"></app-notification>
+		</div>
+		
 		<div class="container">
 			<div class="row" th:if="${filtered}">
 				<div class="col-xs-12 text-center">
 					<a th:href="@{/}" href="/">View all</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 text-center">
+					<a th:href="@{/newsletter}" href="/newsletter.html"><button class="btn btn-info">Newsletter</button></a>
 				</div>
 			</div>
 		    <div class="row">
@@ -19,7 +28,7 @@
 		    </div>
 		    <div class="row course-list list">
 		        <div class="col-md-4" th:each="p,it : ${productList}">
-		        	<small th:text="'index object: ' + ${it}"></small>
+		        	<!-- <small th:text="'index object: ' + ${it}"></small> -->
 		            <div th:replace="fragments/productdiv :: productdiv"></div>
 		        </div>
 		    </div>

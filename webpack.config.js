@@ -4,7 +4,7 @@ var webpack = require('webpack')
 module.exports = {
   entry: './src/main/resources/static/vue/main.js',
   output: {
-	    path: path.resolve(__dirname, './src/main/resources/static/dist/'),
+	    path: path.resolve(__dirname, './src/main/resources/static/dist/vue/'),
 	    filename: 'bundle.js'
   },
   resolve: {
