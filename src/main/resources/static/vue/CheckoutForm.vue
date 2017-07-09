@@ -68,11 +68,15 @@ export default {
 
 			axios.post('docheckout', this.form)
 				.then(res => {
-					debugger
 					window.location.href = res.data.data;
 				})
 				.catch(err => {
-					this.errors = err.response.data.data;
+					if(err.response && err.response.data && err.response.data.data && err.response.data.data.length > 0){
+							this.errors = err.response.data.data;
+					} else{
+						this.errors.push({field:'', code:'csrf', defaultMessage: 'csrf header missing'});
+					}
+
 				});
 		},
 		hasError(field){

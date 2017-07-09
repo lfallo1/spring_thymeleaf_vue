@@ -37,6 +37,9 @@
 		            <h1 th:text="#{index.courses.headline}">Spring Framework Guru Courses</h1>
 		        </div>
 		    </div>
+		    
+		    <app-products></app-products>
+		    
 		    <div class="row course-list list">
 		        <div class="col-md-4" th:each="p,it : ${productList}">
 		        	<!-- <small th:text="'index object: ' + ${it}"></small> -->

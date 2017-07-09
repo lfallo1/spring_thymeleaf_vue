@@ -16,16 +16,10 @@ public class LoginController {
 
 		return "loginform";
 	}
-	//
-	// @RequestMapping(value = "/dologin", method = RequestMethod.POST)
-	// public String doLogin(@Valid LoginCommand loginCommand, BindingResult
-	// bindingResult){
-	//
-	// if(bindingResult.hasErrors()){
-	// return "loginform";
-	// }
-	//
-	// return "redirect:index";
-	// }
+	
+	@RequestMapping("/logout-success")
+	public String logout() {
+		return "logoutsuccess";
+	}
 
 }

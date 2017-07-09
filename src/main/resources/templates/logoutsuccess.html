@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"></head>
+	
+<body>
+	<div id="app">
+		<div th:replace="fragments/jumbotron :: jumbotron"></div>
+	
+		<div class="row">
+			<div class="col-xs-12 text-center">
+				<a th:href="@{/}" href="/">Home</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<div class="alert alert-info text-center"><h3>You have been logged out</h3></div>
+			</div>				
+		</div>
+	</div>
+<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/scripts :: scripts"></div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"></head>
+	
+<body>
+	<div id="app">
+		<div th:replace="fragments/jumbotron :: jumbotron"></div>
+	
+		<div class="row">
+			<div class="col-xs-12 text-center">
+				<a th:href="@{/}" href="/">Home</a>
+			</div>
+		</div>
+		<div class="row text-center" th:each="i : ${#numbers.sequence(1, 2)}">
+			<div class="col-md-8 col-md-offset-3">
+				<img class="thumbnail" th:src="'/images/superhero' + ${i} + '.jpg'" src="../static/superhero1.jpg" width="640px" />
+			</div>
+		</div>
+	</div>
+<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/scripts :: scripts"></div>
+</body>
+</html>
