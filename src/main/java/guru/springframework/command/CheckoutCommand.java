@@ -1,4 +1,4 @@
-package guru.springframework.domain;
+package guru.springframework.command;
 
 import javax.validation.constraints.Size;
 

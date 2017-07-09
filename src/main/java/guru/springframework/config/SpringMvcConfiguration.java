@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -11,24 +12,35 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 @Configuration
-public class SpringMvcConfiguration extends WebMvcConfigurerAdapter{
+public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
 
 	@Bean
-	public LocaleResolver localeResolver(){
+	public LocaleResolver localeResolver() {
 		SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
 		sessionLocaleResolver.setDefaultLocale(Locale.US);
 		return sessionLocaleResolver;
 	}
-	
+
 	@Bean
-	public LocaleChangeInterceptor localeChangeInterceptor(){
+	public LocaleChangeInterceptor localeChangeInterceptor() {
 		LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
 		localeChangeInterceptor.setParamName("lang");
 		return localeChangeInterceptor;
 	}
-	
+
 	@Override
-	public void addInterceptors(InterceptorRegistry interceptorRegistry){
+	public void addInterceptors(InterceptorRegistry interceptorRegistry) {
 		interceptorRegistry.addInterceptor(localeChangeInterceptor());
 	}
+
+	@Bean(name = "dataSource")
+	public DriverManagerDataSource dataSource() {
+		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+		driverManagerDataSource.setDriverClassName("org.postgresql.Driver");
+		driverManagerDataSource.setUrl("jdbc:postgresql://localhost:5432/SpringProducts");
+		driverManagerDataSource.setUsername("postgres");
+		driverManagerDataSource.setPassword("admin");
+		return driverManagerDataSource;
+	}
+
 }

@@ -45,6 +45,7 @@
 <script>
 import axios from 'axios';
 import FormErrors from './FormErrors.vue';
+import config from './config.js';
 
 export default {
   data () {
@@ -64,6 +65,7 @@ export default {
 	methods: {
 		submit(){
 			this.errors = [];
+
 			axios.post('docheckout', this.form)
 				.then(res => {
 					debugger

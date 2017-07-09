@@ -1,6 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="header">
     <meta charset="UTF-8" />
+    <meta name="csrf-token" th:content="${_csrf.token}" />
     <title th:text="${title}">Page Title</title>
 
     <link th:href="@{/bower/bootstrap/dist/css/bootstrap.css}" rel="stylesheet" media="screen"/>

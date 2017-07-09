@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.collect.ImmutableMap;
 
-import guru.springframework.domain.CheckoutCommand;
+import guru.springframework.command.CheckoutCommand;
 
 @Controller
 public class CheckoutController {
