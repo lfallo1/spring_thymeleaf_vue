@@ -1,0 +1,19 @@
+<div th:fragment="securityfooter">
+	<div sec:authorize="isAuthenticated()">
+	  	This content is only shown to authenticated users.
+	  	Logged user: <span sec:authentication="name">Bob</span>
+		Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+		<a th:href="@{/logout}" href="/logout">Logout</a>
+		
+		<div sec:authorize="hasRole('ROLE_ADMIN')">
+		  This content is only shown to admins.
+		</div>
+		<div sec:authorize="hasRole('ROLE_USER')">
+		  This content is only shown to users.
+		</div>
+	</div>
+	<div sec:authorize="isAnonymous()">
+		<a th:href="@{/login}" href="/login">Login</a>
+	</div>
+	
+</div>

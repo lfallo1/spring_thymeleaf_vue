@@ -10,10 +10,11 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 
 @Configuration
 public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
-
+	
 	@Bean
 	public LocaleResolver localeResolver() {
 		SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
@@ -31,6 +32,25 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
 	@Override
 	public void addInterceptors(InterceptorRegistry interceptorRegistry) {
 		interceptorRegistry.addInterceptor(localeChangeInterceptor());
+	}
+	
+	/**
+	 *  <bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+      ...
+      <property name="additionalDialects">
+        <set>
+          <!-- Note the package would change to 'springsecurity3' if you are using that version -->
+          <bean class="org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect"/>
+        </set>
+      </property>
+	  ...
+    </bean>
+	 * @return
+	 */
+	
+	@Bean
+	public SpringSecurityDialect springSecurityDialect() {
+	    return new SpringSecurityDialect();
 	}
 
 	@Bean(name = "dataSource")
