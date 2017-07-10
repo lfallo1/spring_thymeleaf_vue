@@ -23,10 +23,14 @@ public class UserRepository extends JdbcDaoSupport {
 	
 	RowMapper<UserPrivileges> USER_ROW_MAPPER = (rs, rownum) -> {
 		UserPrivileges user = new UserPrivileges();
+		
 		user.setAuthenticated(true);
 		user.setUsername(rs.getString("username"));
 		user.setPassword(rs.getString("password"));
 	
+		user.setUsing2fa(rs.getBoolean("is_using_2fa"));
+		user.setSecret(rs.getString("secret"));
+		
 		if(user.getUsername().equals("lfallon")){
 			user.setFullname("lance fallon");
 			user.setSuitDescription("some suit description");
@@ -48,7 +52,7 @@ public class UserRepository extends JdbcDaoSupport {
 	
 	public UserPrivileges findByUsername(String username){
 		try{
-			UserPrivileges user = getJdbcTemplate().queryForObject("select username,password, enabled from users where username=?", new Object[]{ username }, USER_ROW_MAPPER);
+			UserPrivileges user = getJdbcTemplate().queryForObject("select username,password, enabled, is_using_2fa, secret from users where username=?", new Object[]{ username }, USER_ROW_MAPPER);
 			if(user != null){
 				List<GrantedAuthority> authorities = getJdbcTemplate().query("select username, role from user_roles where username=?", new Object[]{ username }, USER_AUTHORITIES_ROW_MAPPER);
 				user.setAuthorities(authorities);

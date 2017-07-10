@@ -34,6 +34,10 @@ public class UserPrivileges implements UserDetails, Serializable {
 
 	private boolean isAuthenticated;
 
+	private boolean isUsing2fa;
+
+	private String secret;
+
 	public int getUserID() {
 		return userID;
 	}
@@ -132,6 +136,22 @@ public class UserPrivileges implements UserDetails, Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public boolean isUsing2fa() {
+		return isUsing2fa;
+	}
+
+	public void setUsing2fa(boolean isUsing2fa) {
+		this.isUsing2fa = isUsing2fa;
+	}
+
+	public String getSecret() {
+		return secret;
+	}
+
+	public void setSecret(String secret) {
+		this.secret = secret;
 	}
 
 }
