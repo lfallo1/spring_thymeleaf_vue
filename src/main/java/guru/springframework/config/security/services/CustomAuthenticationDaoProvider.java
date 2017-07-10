@@ -5,15 +5,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.stereotype.Component;
 
 import guru.springframework.config.security.domain.CustomUsernamePasswordAuthenticationToken;
 import guru.springframework.config.security.domain.CustomWebAuthenticationDetails;
 import guru.springframework.config.security.domain.UserPrivileges;
 
-@Component
+@Deprecated
 public class CustomAuthenticationDaoProvider extends DaoAuthenticationProvider {
-
+	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
