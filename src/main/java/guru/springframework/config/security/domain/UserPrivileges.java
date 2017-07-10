@@ -1,8 +1,7 @@
-package guru.springframework.config;
+package guru.springframework.config.security.domain;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -32,8 +31,6 @@ public class UserPrivileges implements UserDetails, Serializable {
 	private String suitDescription;
 
 	private Integer powerLevel;
-
-	private List<String> dbList;
 
 	private boolean isAuthenticated;
 
@@ -123,14 +120,6 @@ public class UserPrivileges implements UserDetails, Serializable {
 
 	public void setPowerLevel(Integer powerLevel) {
 		this.powerLevel = powerLevel;
-	}
-
-	public List<String> getDbList() {
-		return dbList;
-	}
-
-	public void setDbList(List<String> dbList) {
-		this.dbList = dbList;
 	}
 
 	public boolean isAuthenticated() {

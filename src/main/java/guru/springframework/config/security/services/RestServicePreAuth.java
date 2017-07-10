@@ -1,4 +1,4 @@
-package guru.springframework.config;
+package guru.springframework.config.security.services;
 
 import java.util.Collection;
 

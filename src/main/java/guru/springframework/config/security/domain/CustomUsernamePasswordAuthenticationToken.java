@@ -1,43 +1,28 @@
-package guru.springframework.config;
+package guru.springframework.config.security.domain;
 
 import java.util.Collection;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
-public class CustomAuthentication  extends AbstractAuthenticationToken {
+public class CustomUsernamePasswordAuthenticationToken extends AbstractAuthenticationToken {
+
 	private static final long serialVersionUID = 310L;
 	private final Object principal;
 	private Object credentials;
-	private UserPrivileges userPrivileges;
-
-	/**
-	 * @return the userPrivileges
-	 */
-	public UserPrivileges getUserPrivileges() {
-		return userPrivileges;
-	}
-
-	/**
-	 * @param userPrivileges
-	 *            the userPrivileges to set
-	 */
-	public void setUserPrivileges(UserPrivileges userPrivileges) {
-		this.userPrivileges = userPrivileges;
-	}
 
 	public void setCredentials(Object credentials) {
 		this.credentials = credentials;
 	}
 
-	public CustomAuthentication(final Object principal, final Object credentials) {
+	public CustomUsernamePasswordAuthenticationToken(final Object principal, final Object credentials) {
 		super(null);
 		this.principal = principal;
 		this.credentials = credentials;
 		setAuthenticated(false);
 	}
 
-	public CustomAuthentication(final Object principal, final Object credentials,
+	public CustomUsernamePasswordAuthenticationToken(final Object principal, final Object credentials,
 			final Collection<? extends GrantedAuthority> authorities) {
 		super(authorities);
 		this.principal = principal;
@@ -62,8 +47,4 @@ public class CustomAuthentication  extends AbstractAuthenticationToken {
 		super.setAuthenticated(false);
 	}
 
-	public void eraseCredentials() {
-		super.eraseCredentials();
-		this.credentials = null;
-	}
 }
