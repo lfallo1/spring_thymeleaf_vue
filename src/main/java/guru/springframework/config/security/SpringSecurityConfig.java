@@ -3,7 +3,6 @@ package guru.springframework.config.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -15,8 +14,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import guru.springframework.config.security.services.CustomAuthenticationProvider;
+import guru.springframework.config.security.services.CustomAuthenticationDaoProvider;
 import guru.springframework.config.security.services.CustomUserDetailsService;
+import guru.springframework.config.security.services.CustomWebAuthenticationDetailsSource;
 
 @Configuration
 @EnableWebSecurity
@@ -28,29 +28,30 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Autowired
 	private CustomUserDetailsService userDetailsService;
-
-	@Autowired
-	private CustomAuthenticationProvider customAuthenticationProvider;
+//
+//	@Autowired
+//	private CustomAuthenticationProvider customAuthenticationProvider;
 	
 //	for MFA / 2-factor auth
-//	@Autowired
-//	private CustomWebAuthenticationDetailsSource authenticationDetailsSource;
+	@Autowired
+	private CustomWebAuthenticationDetailsSource authenticationDetailsSource;
 	
 	/**
 	 * create a DaoAuthenticationProvider bean with the user details service and bcrypt password encoder
 	 * @return
 	 */
 	@Bean
-	public AuthenticationProvider authenticationProvider() {
+	public DaoAuthenticationProvider authenticationProvider() {
 		//custom auth provider that handles the mfa verification
-//	    CustomAuthenticationDaoProvider authProvider
-//	      = new CustomAuthenticationDaoProvider();
-//	    return authProvider;
-		
-	    DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-	    authProvider.setUserDetailsService(userDetailsService);
-	    authProvider.setPasswordEncoder(encoder());
+		DaoAuthenticationProvider authProvider = new CustomAuthenticationDaoProvider();
+		authProvider.setUserDetailsService(userDetailsService);
+		authProvider.setPasswordEncoder(encoder());
 	    return authProvider;
+		
+//	    DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+//	    authProvider.setUserDetailsService(userDetailsService);
+//	    authProvider.setPasswordEncoder(encoder());
+//	    return authProvider;
 	}
 	 
 	/**
@@ -71,8 +72,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	  throws Exception {
 		//setup two authentication providers. first try the dao provider, and if that fails try the custom provider.
 	    auth
-	    	.authenticationProvider(authenticationProvider())
-	    	.authenticationProvider(customAuthenticationProvider);
+	    	.authenticationProvider(authenticationProvider());
+//	    	.authenticationProvider(customAuthenticationProvider);
 	}
 	
 	/**
@@ -88,7 +89,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and().authorizeRequests().antMatchers("/", "/newsletter/**", "/product/**", "/api/products").permitAll() //routes
 			.and().formLogin()
 				.loginPage("/login").defaultSuccessUrl("/").permitAll() //login
-//				.authenticationDetailsSource(authenticationDetailsSource) //auth source to enable 2-factor auth
+				.authenticationDetailsSource(authenticationDetailsSource) //auth source to enable 2-factor auth
 			.and().authorizeRequests().antMatchers("/superhero").hasRole("SUPERHERO") //dummy auth rule
 			.and().authorizeRequests().antMatchers("/logout-success", "/login").anonymous() //require anonymous to access
 			.and().authorizeRequests().anyRequest().authenticated() //require auth for other requests

@@ -1,12 +1,10 @@
 package guru.springframework.config.security.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import guru.springframework.config.security.domain.CustomUsernamePasswordAuthenticationToken;
@@ -14,9 +12,7 @@ import guru.springframework.config.security.domain.CustomWebAuthenticationDetail
 import guru.springframework.config.security.domain.UserPrivileges;
 
 @Component
-public class CustomAuthenticationDaoProvider implements AuthenticationProvider {
-	@Autowired
-	private UserDetailsService userDetailsService;
+public class CustomAuthenticationDaoProvider extends DaoAuthenticationProvider {
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -24,21 +20,33 @@ public class CustomAuthenticationDaoProvider implements AuthenticationProvider {
 		String verificationCode = ((CustomWebAuthenticationDetails) authentication.getDetails()).getVerificationCode();
 		String name = authentication.getName();
 
-		// use the credentials
-		// and authenticate against the third-party system
-		UserPrivileges user = (UserPrivileges) userDetailsService.loadUserByUsername(name);
-
+		UserPrivileges user = (UserPrivileges) super.getUserDetailsService().loadUserByUsername(name);
+		
+		//verification code authentication
 		if (user.isUsing2fa()) {
 			if (!user.getSecret().equals(verificationCode)) {
 				throw new BadCredentialsException("Invalid verfication code");
 			}
 		}
 		
-		return new CustomUsernamePasswordAuthenticationToken(user, authentication.getCredentials(), user.getAuthorities());
+		//normal authentication
+		Authentication result = super.authenticate(authentication);
+		return new CustomUsernamePasswordAuthenticationToken(user, result.getCredentials(), user.getAuthorities());
 	}
 
 	@Override
 	public boolean supports(Class<?> authentication) {
 		return authentication.equals(UsernamePasswordAuthenticationToken.class);
+	}
+	
+	/**
+	 * this unfortunately needs to be overridden. when allowing parent to handle, it will check for the
+	 * user details service dependency prior to actually being set.
+	 */
+	@Override
+	protected void doAfterPropertiesSet() throws Exception {
+		if(super.getUserDetailsService() != null){
+			System.out.println("UserDetailsService has been configured properly");
+		}
 	}
 }
