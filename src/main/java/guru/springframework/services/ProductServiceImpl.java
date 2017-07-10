@@ -8,16 +8,18 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import guru.springframework.domain.Author;
 import guru.springframework.domain.Product;
-import guru.springframework.domain.ProductCategory;
+import guru.springframework.domain.Category;
 
 /**
  * Created by jt on 1/26/16.
  */
 @Service
+@Profile("services")
 public class ProductServiceImpl implements ProductService {
 
     private Map<Integer, Product> productMap;
@@ -41,7 +43,7 @@ public class ProductServiceImpl implements ProductService {
         		.filter(p->{
         			return p.getProductCategories()
 	        			.stream()
-	        			.map(ProductCategory::getId)
+	        			.map(Category::getId)
 	        			.collect(Collectors.toList()).contains(category.get());
         		})
         		.collect(Collectors.toList());
@@ -56,23 +58,23 @@ public class ProductServiceImpl implements ProductService {
         jt.setId(1);
         jt.setImage("instructor_jt.jpg");
 
-        ProductCategory springIntroCat = new ProductCategory();
+        Category springIntroCat = new Category();
         springIntroCat.setId(1);
         springIntroCat.setCategory("Spring Introduction");
 
-        ProductCategory springCoreCat = new ProductCategory();
+        Category springCoreCat = new Category();
         springCoreCat.setId(2);
         springCoreCat.setCategory("Spring Core");
 
-        ProductCategory springBootCat = new ProductCategory();
+        Category springBootCat = new Category();
         springBootCat.setId(3);
         springBootCat.setCategory("Spring Boot");
 
-        ProductCategory thymeleafCat = new ProductCategory();
+        Category thymeleafCat = new Category();
         thymeleafCat.setId(4);
         thymeleafCat.setCategory("Thymeleaf");
 
-        ProductCategory geapCat = new ProductCategory();
+        Category geapCat = new Category();
         geapCat.setId(5);
         geapCat.setCategory("G.E.A.P");
 

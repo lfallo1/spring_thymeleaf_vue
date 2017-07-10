@@ -24,7 +24,7 @@ public class ProductWebService {
 	private ProductService productService;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	@PreAuthorize("@restServicePreAuth.hasRole(#auth, 'ROLE_SUPERHERO')")
+	@PreAuthorize("isAuthenticated() && @restServicePreAuth.isProductAdministrator(#auth)")
 	public ResponseEntity<List<Product>> getProducts(Authentication auth, @RequestParam("category") Optional<Integer> category) {
 		return new ResponseEntity<>(this.productService.listProducts(category), HttpStatus.OK);
 	}

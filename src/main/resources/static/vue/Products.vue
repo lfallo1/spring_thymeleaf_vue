@@ -1,6 +1,6 @@
 <template>
 	<div id="products-wrapper">
-		
+
 	  <div class="col-md-4" v-for="product in products">
 	      <div class="course-listing">
 	          <div class="row">
@@ -23,6 +23,7 @@
 	          <div class="row course-listing-extra-info col-xs-12">
 	              <div class="col-xs-8">
 	                  <img align="left" alt="John Thompson"
+										width="50px"
 	                    :src="'images/' + product.author.image"
 	                       class="img-circle" />
 	                  <div class="small course-author-name">

@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -12,8 +13,16 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 
+import guru.springframework.config.interceptors.LoginPageInterceptor;
+
 @Configuration
+@EnableJpaRepositories("guru.springframework.repositories")
 public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
+	
+	@Bean
+	public LoginPageInterceptor loginPageInterceptor(){
+		return new LoginPageInterceptor();
+	}
 	
 	@Bean
 	public LocaleResolver localeResolver() {
@@ -32,6 +41,7 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
 	@Override
 	public void addInterceptors(InterceptorRegistry interceptorRegistry) {
 		interceptorRegistry.addInterceptor(localeChangeInterceptor());
+		interceptorRegistry.addInterceptor(loginPageInterceptor());
 	}
 	
 	/**

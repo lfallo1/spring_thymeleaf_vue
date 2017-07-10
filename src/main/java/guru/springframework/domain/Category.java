@@ -1,20 +1,14 @@
 package guru.springframework.domain;
 
+import javax.persistence.Entity;
+
 /**
  * Created by jt on 1/26/16.
  */
-public class ProductCategory {
+@Entity
+public class Category extends AbstractDomainClass {
 
-    private Integer id;
     private String category;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getCategory() {
         return category;

@@ -1,15 +1,14 @@
 <div th:fragment="securityfooter">
 	<div sec:authorize="isAuthenticated()">
-			This content is only shown to authenticated users. Logged user: <span sec:authentication="name">Bob</span> 
-			Roles: <span sec:authentication="authorities">[ROLE_USER,ROLE_ADMIN]</span>
-			<a th:href="@{/logout}" href="/logout">Logout</a>
+		This content is only shown to authenticated users.
+		<a th:href="@{/logout}" href="/logout">Logout</a>
+		
+		Logged user: <span sec:authentication="name">Bob</span> 
+		Roles: <span sec:authentication="authorities">[ROLE_USER,ROLE_ADMIN]</span>
 
-		<div sec:authorize="hasRole('ROLE_ADMIN')">This content is only
-			shown to admins.</div>
-		<div sec:authorize="hasRole('ROLE_SUPERHERO')">This content is only
-			shown to superheroes.</div>
-		<div th:text="'OBJ: ' + ${#authentication.principal.suitDescription}">The value of the "name"
-			property of the authentication object should appear here.</div>
+		<div sec:authorize="hasRole('ROLE_ADMIN')">This content is only shown to admins.</div>
+		<div sec:authorize="hasRole('ROLE_USER')">This content is only shown to users.</div>
+		<div th:text="'Principal: ' + ${#authentication.principal}">Value of principal</div>
 	</div>
 	<div sec:authorize="isAnonymous()">
 		<a th:href="@{/login}" href="/login">Login</a>

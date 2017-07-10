@@ -1,21 +1,16 @@
 package guru.springframework.domain;
 
+import javax.persistence.Entity;
+
 /**
  * Created by jt on 1/26/16.
  */
-public class Author {
-    private Integer id;
+@Entity
+public class Author extends AbstractDomainClass {
+    
     private String firstName;
     private String lastName;
     private String image;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;

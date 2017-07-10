@@ -17,10 +17,6 @@
 		</app-contactus>
 		<br>
 		
-		<div th:if="${signupcomplete}">
-			<app-notification v-if="showNotifications" :message="'Signup complete'"></app-notification>
-		</div>
-		
 		<div class="container">
 			<div class="row" th:if="${filtered}">
 				<div class="col-xs-12 text-center">
