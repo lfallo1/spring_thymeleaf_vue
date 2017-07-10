@@ -4,11 +4,13 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -18,17 +20,29 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private DataSource dataSource;
-
+	
 	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		// @formatter:off
+	private UserDetailsService userDetailsService;
+	
+	@Autowired
+	private AuthenticationProvider authProvider;
 
-		auth.jdbcAuthentication().dataSource(dataSource)
-				.usersByUsernameQuery("select username,password, enabled from users where username=?")
-				.authoritiesByUsernameQuery("select username, role from user_roles where username=?");
-		 
-			// @formatter:on
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+	    auth.authenticationProvider(authProvider);
+	    auth.userDetailsService(userDetailsService);
 	}
+	
+//	@Autowired
+//	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//		// @formatter:off
+//
+//		auth.jdbcAuthentication().dataSource(dataSource)
+//				.usersByUsernameQuery("select username,password, enabled from users where username=?")
+//				.authoritiesByUsernameQuery("select username, role from user_roles where username=?");
+		
+//			// @formatter:on
+//	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -48,6 +62,5 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 //		// @formatter:on
 	}
-	
 
 }
