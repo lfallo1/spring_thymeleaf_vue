@@ -1,0 +1,1 @@
+### sample docker-compose file for starting a java container that runs app and a postgres service

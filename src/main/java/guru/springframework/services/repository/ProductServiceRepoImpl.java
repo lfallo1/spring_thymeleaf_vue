@@ -13,7 +13,7 @@ import guru.springframework.repositories.ProductRepository;
 import guru.springframework.services.ProductService;
 
 @Component
-@Profile({"springdatajpa", "develop"})
+@Profile({"springdatajpa", "develop", "prod"})
 public class ProductServiceRepoImpl implements ProductService {
 
 	@Autowired
