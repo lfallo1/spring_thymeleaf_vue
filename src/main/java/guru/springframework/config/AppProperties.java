@@ -3,6 +3,11 @@ package guru.springframework.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * pull configuration props from application-{env}.properties files
+ * @author lfallon
+ *
+ */
 @Configuration
 public class AppProperties {
 
