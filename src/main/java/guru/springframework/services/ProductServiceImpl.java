@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import guru.springframework.domain.Author;
@@ -18,6 +19,7 @@ import guru.springframework.domain.Product;
  * Created by jt on 1/26/16.
  */
 @Service
+@Profile("testing")
 public class ProductServiceImpl implements ProductService {
 
     private Map<Integer, Product> productMap;

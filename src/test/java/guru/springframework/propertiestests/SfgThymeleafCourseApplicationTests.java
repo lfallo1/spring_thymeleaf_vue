@@ -1,4 +1,4 @@
-package guru.springframework;
+package guru.springframework.propertiestests;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,26 +12,19 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import guru.springframework.config.ExternalPropsPropertySourceTestConfig;
+import guru.springframework.base.SfgThymeleafUnitTests;
 import guru.springframework.domain.JmsBroker;
 import guru.springframework.domain.Product;
+import guru.springframework.propertiestests.config.ExternalPropsPropertySourceTestConfig;
 import guru.springframework.services.ProductService;
 
-/**
- * https://stackoverflow.com/questions/39690094/spring-boot-default-profile-for-integration-tests
- * @author lfallon
- *
- */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { ExternalPropsPropertySourceTestConfig.class })
+
 //@TestPropertySource("/application-testing.properties")
-@SpringBootTest()
-@ActiveProfiles("testing")
-public class SfgThymeleafCourseApplicationTests {
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest(classes = { ExternalPropsPropertySourceTestConfig.class })
+public class SfgThymeleafCourseApplicationTests implements SfgThymeleafUnitTests {
 	
 	@Autowired
 	private JmsBroker jmsBroker;
@@ -40,8 +33,8 @@ public class SfgThymeleafCourseApplicationTests {
 	ProductService mockProductService;
 	
 	@Test
-	public void contextLoads() {
-		Assert.assertEquals("10.10.10.10", jmsBroker.getJmsServer());
+	public void jmsBrokerTest() {
+		Assert.assertEquals("10.11.12.13", jmsBroker.getJmsServer());
 		Assert.assertEquals(new Integer(1234), jmsBroker.getJmsPort());
 		Assert.assertEquals("test", jmsBroker.getJmsUser());
 		Assert.assertEquals("test", jmsBroker.getJmsPassword());

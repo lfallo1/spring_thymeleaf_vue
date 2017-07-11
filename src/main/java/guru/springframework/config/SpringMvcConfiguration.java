@@ -2,6 +2,7 @@ package guru.springframework.config;
 
 import java.util.Locale;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -19,10 +20,10 @@ import guru.springframework.config.interceptors.LoginPageInterceptor;
 @EnableJpaRepositories("guru.springframework.repositories")
 public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
 	
-	@Bean
-	public LoginPageInterceptor loginPageInterceptor(){
-		return new LoginPageInterceptor();
-	}
+	@Autowired
+	private AppProperties appProperties;
+	
+	// --- locale resolvers --- 
 	
 	@Bean
 	public LocaleResolver localeResolver() {
@@ -38,38 +39,35 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
 		return localeChangeInterceptor;
 	}
 
+	// --- interceptors --- 
+	
+	@Bean
+	public LoginPageInterceptor loginPageInterceptor(){
+		return new LoginPageInterceptor();
+	}
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry interceptorRegistry) {
 		interceptorRegistry.addInterceptor(localeChangeInterceptor());
 		interceptorRegistry.addInterceptor(loginPageInterceptor());
 	}
 	
-	/**
-	 *  <bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
-      ...
-      <property name="additionalDialects">
-        <set>
-          <!-- Note the package would change to 'springsecurity3' if you are using that version -->
-          <bean class="org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect"/>
-        </set>
-      </property>
-	  ...
-    </bean>
-	 * @return
-	 */
+	// -- explicitly create spring security dialect bean for thymeleaf
 	
 	@Bean
 	public SpringSecurityDialect springSecurityDialect() {
 	    return new SpringSecurityDialect();
 	}
 
+	// --- wire up datasource ---
+	
 	@Bean(name = "dataSource")
 	public DriverManagerDataSource dataSource() {
 		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-		driverManagerDataSource.setDriverClassName("org.postgresql.Driver");
-		driverManagerDataSource.setUrl("jdbc:postgresql://localhost:5432/SpringProducts");
-		driverManagerDataSource.setUsername("postgres");
-		driverManagerDataSource.setPassword("admin");
+		driverManagerDataSource.setDriverClassName(appProperties.getJdbcDriver());
+		driverManagerDataSource.setUrl(appProperties.getJdbcUrl());
+		driverManagerDataSource.setUsername(appProperties.getJdbcUsername());
+		driverManagerDataSource.setPassword(appProperties.getJdbcPassword());
 		return driverManagerDataSource;
 	}
 
