@@ -1,7 +1,8 @@
 String template = new File("${project.basedir}/src/main/docker/DockerComposeTemplate".toString()).getText()
 
+def imageTag = project.properties['git.commit.id.abbrev']
 def dockerFileText = new groovy.text.SimpleTemplateEngine().createTemplate(template)
-        .make([gitCommit: docker.image.tag])
+        .make([gitCommit: imageTag])
 
 println "writing file " + "${project.basedir}/src/main/docker/compose/docker-compose.yml"
 File dockerFile = new File("${project.basedir}/src/main/docker/compose/docker-compose.yml".toString())
