@@ -11,3 +11,6 @@
 #### interpolating thymeleaf spring variables from within vue inline components
 #### integrating vue forms in server rendered pages
 #### csrf configuration from spring -> thymeleaf -> vuejs 
+#### property encryptions
+#### docker build / push scripts along with Dockerfile & docker-compose.yml file generation
+#### git property info
