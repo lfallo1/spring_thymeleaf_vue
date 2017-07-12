@@ -158,6 +158,7 @@
 				<configuration>
 					<scripts>
 						<script>file:///${project.basedir}/src/main/scripts/BuildDockerfile.groovy</script>
+						<script>file:///${project.basedir}/src/main/scripts/BuildDockercompose.groovy</script>
 					</scripts>
 				</configuration>
 				<dependencies>
