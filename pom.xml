@@ -23,8 +23,9 @@
 		<java.version>1.8</java.version>
 		<thymeleaf.version>3.0.3.RELEASE</thymeleaf.version>
 		<thymeleaf-layout-dialect.version>2.1.1</thymeleaf-layout-dialect.version>
-		<docker.image.prefix>lfallon</docker.image.prefix>
-		<docker.image.name>thymeleafdemo</docker.image.name>		
+		<docker.image.prefix>lfallo1</docker.image.prefix>
+		<docker.image.name>thymeleafdemo</docker.image.name>
+		<docker.host>http://127.0.0.1:2375</docker.host>
 	</properties>
 
 	<dependencies>
@@ -102,12 +103,18 @@
 			<plugin>
 				<groupId>io.fabric8</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
-				<version>0.20.0</version>
+				<version>0.21.0</version>
 
 				<configuration>
 
-					<dockerHost>http://127.0.0.1:2375</dockerHost>
+					<!-- <dockerHost>http://127.0.0.1:2375</dockerHost> -->
 					<!-- <dockerHost>unix:///var/run/docker.sock</dockerHost> -->
+					<dockerHost>${docker.host}</dockerHost>
+					
+					<authConfig>
+						<username>lfallo1</username>
+						<password>Snoopy08</password>
+					</authConfig>
 
 					<verbose>true</verbose>
 					<images>
