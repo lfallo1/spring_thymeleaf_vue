@@ -1,7 +1,7 @@
 version: "3.1"
 services:
   spring-boot-docker:
-    image: lfallon/thymeleafdemo:${gitCommit}
+    image: lfallo1/thymeleafdemo:${gitCommit}
     restart: always
     ports:
       - "8082:8082"
