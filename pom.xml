@@ -26,6 +26,7 @@
 		<docker.image.prefix>lfallo1</docker.image.prefix>
 		<docker.image.name>thymeleafdemo</docker.image.name>
 		<docker.host>http://127.0.0.1:2375</docker.host>
+		<docker.image.tag>${git.commit.time}.${git.commit.id.abbrev}</docker.image.tag>
 	</properties>
 
 	<dependencies>
@@ -110,7 +111,7 @@
 					<!-- <dockerHost>http://127.0.0.1:2375</dockerHost> -->
 					<!-- <dockerHost>unix:///var/run/docker.sock</dockerHost> -->
 					<dockerHost>${docker.host}</dockerHost>
-					
+
 					<authConfig>
 						<username>lfallo1</username>
 						<password>Snoopy08</password>
@@ -119,7 +120,7 @@
 					<verbose>true</verbose>
 					<images>
 						<image>
-							<name>${docker.image.prefix}/${docker.image.name}</name>
+							<name>${docker.image.prefix}/${docker.image.name}:${docker.image.tag}</name>
 							<build>
 								<dockerFileDir>${project.basedir}/target/dockerfile/</dockerFileDir>
 
@@ -169,7 +170,25 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-
+			<plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>revision</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<dateFormat>yyyyMMdd-HHmmss</dateFormat><!-- human-readable part of 
+						the version number -->
+					<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+					<generateGitPropertiesFile>false</generateGitPropertiesFile><!-- somehow 
+						necessary. otherwise the variables are not available in the pom -->
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
