@@ -34,7 +34,7 @@ public class IndexController {
 	
 	@ModelAttribute("gitCommit")
 	public String gitCommit(){
-		return this.appProperties.getGitCommitId();
+		return this.appProperties.getGitInfo().toString();
 	}
 	
 	@RequestMapping("/")

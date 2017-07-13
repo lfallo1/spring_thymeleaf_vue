@@ -182,24 +182,29 @@
 							<goal>revision</goal>
 						</goals>
 					</execution>
-				</executions>
+				</executions>				
 				<configuration>
-					<dateFormat>yyyyMMdd-HHmmss</dateFormat><!-- human-readable part of 
-						the version number -->
-					<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
-					<generateGitPropertiesFile>false</generateGitPropertiesFile>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>pl.project13.maven</groupId>
-				<artifactId>git-commit-id-plugin</artifactId>
-				<configuration>
-					<dateFormat>yyyyMMdd-HHmmss</dateFormat><!-- human-readable part of 
-						the version number -->
-					<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+					<dateFormat>yyyyMMdd-HHmmss</dateFormat>
 					<generateGitPropertiesFile>true</generateGitPropertiesFile>
+					<injectAllReactorProjects>true</injectAllReactorProjects>
 				</configuration>
 			</plugin>			
+<!-- 			<plugin> -->
+<!-- 				<groupId>pl.project13.maven</groupId> -->
+<!-- 				<artifactId>git-commit-id-plugin</artifactId> -->
+<!-- 				<executions> -->
+<!-- 					<execution> -->
+<!-- 						<phase>validate</phase> -->
+<!-- 						<goals> -->
+<!-- 							<goal>revision</goal> -->
+<!-- 						</goals> -->
+<!-- 					</execution> -->
+<!-- 				</executions> -->
+<!-- 				<configuration> -->
+<!-- 					<dateFormat>yyyyMMdd-HHmmss</dateFormat> -->
+<!-- 					<generateGitPropertiesFile>false</generateGitPropertiesFile> -->
+<!-- 				</configuration> -->
+<!-- 			</plugin> -->
 		</plugins>
 	</build>
 

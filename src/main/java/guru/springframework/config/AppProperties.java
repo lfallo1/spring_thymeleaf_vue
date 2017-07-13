@@ -1,5 +1,6 @@
 package guru.springframework.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
@@ -38,8 +39,8 @@ public class AppProperties {
 	@Value("${guru.jms.password}")
 	String jmsPassword;
 
-	@Value("${git.commit.id}")
-	String gitCommitId;
+	@Autowired
+	private GitInfo gitInfo;
 
 	public String getJdbcDriver() {
 		return jdbcDriver;
@@ -73,8 +74,8 @@ public class AppProperties {
 		return jmsPassword;
 	}
 
-	public String getGitCommitId() {
-		return gitCommitId;
+	public GitInfo getGitInfo() {
+		return gitInfo;
 	}
 
 }
