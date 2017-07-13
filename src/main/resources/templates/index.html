@@ -6,6 +6,8 @@
 	<div id="app">
 		<div th:replace="fragments/jumbotron :: jumbotron"></div>
 		
+		<div class="alert alert-warning text-center"><span>Git Version | </span><h3 th:text="${gitCommit}">Git Commit ID</h3></div>
+		
 		<!-- inline template (can use thymeleaf within an inline template) -->
 		<app-contactus inline-template>
 			<div>

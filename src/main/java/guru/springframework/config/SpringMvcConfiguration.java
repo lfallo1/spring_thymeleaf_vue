@@ -5,6 +5,8 @@ import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.LocaleResolver;
@@ -71,4 +73,13 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
 		return driverManagerDataSource;
 	}
 
+	@Bean
+    public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
+        PropertySourcesPlaceholderConfigurer propsConfig 
+          = new PropertySourcesPlaceholderConfigurer();
+        propsConfig.setLocation(new ClassPathResource("git.properties"));
+        propsConfig.setIgnoreResourceNotFound(true);
+        propsConfig.setIgnoreUnresolvablePlaceholders(true);
+        return propsConfig;
+    }
 }

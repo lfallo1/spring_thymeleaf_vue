@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * pull configuration props from application-{env}.properties files
+ * 
  * @author lfallon
  *
  */
@@ -37,6 +38,9 @@ public class AppProperties {
 	@Value("${guru.jms.password}")
 	String jmsPassword;
 
+	@Value("${git.commit.id}")
+	String gitCommitId;
+
 	public String getJdbcDriver() {
 		return jdbcDriver;
 	}
@@ -67,6 +71,10 @@ public class AppProperties {
 
 	public String getJmsPassword() {
 		return jmsPassword;
+	}
+
+	public String getGitCommitId() {
+		return gitCommitId;
 	}
 
 }
