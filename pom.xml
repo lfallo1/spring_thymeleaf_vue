@@ -109,8 +109,8 @@
 				<configuration>
 					<!-- f it -->
 					<!-- <dockerHost>http://127.0.0.1:2375</dockerHost> -->
-					<!-- <dockerHost>unix:///var/run/docker.sock</dockerHost> -->
-					<dockerHost>${docker.host}</dockerHost>
+					<dockerHost>unix:///var/run/docker.sock</dockerHost>
+					<!-- <dockerHost>${docker.host}</dockerHost> -->
 
 					<authConfig>
 						<username>lfallo1</username>
