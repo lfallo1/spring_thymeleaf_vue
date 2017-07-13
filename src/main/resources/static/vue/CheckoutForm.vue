@@ -3,7 +3,7 @@
 		<div id="form-wrapper" class="row">
 					<div class="col-sm-8 col-sm-offset-2">
 
-							<h4 class="page-header">Checkout</h4>
+							<h4 class="page-header">You fdadsaf <strong>Checkout</strong> from this page</h4>
 							<form role="form" @submit.prevent="submit">
 									<div class="form-group float-label-control" :class="hasError('firstName')">
 											<label for="">First Name</label>
