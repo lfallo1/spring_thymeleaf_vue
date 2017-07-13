@@ -27,6 +27,7 @@
 		<docker.image.name>thymeleafdemo</docker.image.name>
 		<docker.host>http://127.0.0.1:2375</docker.host>
 		<docker.image.tag>${git.commit.id.abbrev}</docker.image.tag>
+		<git.generate.properties>true</git.generate.properties>
 	</properties>
 
 	<dependencies>
@@ -186,9 +187,19 @@
 					<dateFormat>yyyyMMdd-HHmmss</dateFormat><!-- human-readable part of 
 						the version number -->
 					<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
-<!-- 					<generateGitPropertiesFile>false</generateGitPropertiesFile> -->
+					<generateGitPropertiesFile>false</generateGitPropertiesFile>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+				<configuration>
+					<dateFormat>yyyyMMdd-HHmmss</dateFormat><!-- human-readable part of 
+						the version number -->
+					<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+					<generateGitPropertiesFile>true</generateGitPropertiesFile>
+				</configuration>
+			</plugin>			
 		</plugins>
 	</build>
 
